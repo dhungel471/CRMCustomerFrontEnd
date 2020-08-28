@@ -20,10 +20,23 @@ function mapStateToProps(state) {
   
 function AddCustomers(props) {
   const slug = props.match.params.id; //checks if id is present in URL, then call to Edit
-  const [fName, setfName] = useState(props.customerdata && props.customerdata.id ? props.customerdata.firstName : '');
-  const [lName, setlName] = useState(props.customerdata && props.customerdata.id ? props.customerdata.lastName : '');
-  const[phone, setPhone] = useState(props.customerdata && props.customerdata.id ? props.customerdata.phoneNumber : '');
-  const [address, setAddress] = useState(props.customerdata && props.customerdata.id ? props.customerdata.address : '');
+
+  let customers = props.customerdata;
+  let customer = null;
+
+  if (slug && customers) {
+    for (let i = 0; i < customers.length; i++) {
+      if (customers[i].id === slug) {
+        customer = customers[i];
+      }
+    }
+  }
+
+ 
+  const [fName, setfName] = useState(customer && customer.id ? customer.firstName : '');
+  const [lName, setlName] = useState(customer && customer.id ? customer.lastName : '');
+  const[phone, setPhone] = useState(customer && customer.id ? customer.phoneNumber : '');
+  const [address, setAddress] = useState(customer && customer.id ? props.customerdata.address : '');
   const history = useHistory();
 
   useEffect(() => {
@@ -40,7 +53,7 @@ function AddCustomers(props) {
         //props.fetchCustomerWithID(slug)
       }
      
-    }, [fName]) 
+    }, [slug]) 
 
     
     function handleSubmit(event) {
