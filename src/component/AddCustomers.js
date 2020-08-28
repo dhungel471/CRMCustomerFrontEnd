@@ -36,7 +36,7 @@ function AddCustomers(props) {
   const [fName, setfName] = useState(customer && customer.id ? customer.firstName : '');
   const [lName, setlName] = useState(customer && customer.id ? customer.lastName : '');
   const[phone, setPhone] = useState(customer && customer.id ? customer.phoneNumber : '');
-  const [address, setAddress] = useState(customer && customer.id ? props.customerdata.address : '');
+  const [address, setAddress] = useState(customer && customer.id ? customer.address : '');
   const history = useHistory();
 
   useEffect(() => {
