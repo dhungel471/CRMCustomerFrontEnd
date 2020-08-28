@@ -4,6 +4,10 @@ export const FETCH_CUSTOMER_BEGIN = 'FETCH_CUSTOMER_BEGIN';
 export const FETCH_CUSTOMER_SUCCESS = 'FETCH_CUSTOMER_SUCCESS';
 export const FETCH_CUSTOMER_FAILURE = 'FETCH_CUSTOMER_FAILURE';
 
+export const FETCH_CUSTOMER_WITHID_BEGIN = 'FETCH_CUSTOMER_WITHID_BEGIN';
+export const FETCH_CUSTOMER_WITHID_SUCCESS = 'FETCH_CUSTOMER_WITHID_SUCCESS';
+export const FETCH_CUSTOMER_WITHID_FAILURE = 'FETCH_CUSTOMER_WITHID_FAILURE';
+
 export const ADD_CUSTOMER_BEGIN = 'ADD_CUSTOMER_BEGIN';
 export const ADD_CUSTOMER_SUCCESS = 'ADD_CUSTOMER_SUCCESS';
 export const ADD_CUSTOMER_FAILURE = 'ADD_CUSTOMER_FAILURE';
@@ -28,6 +32,20 @@ export const fetchCustomerSuccess = customerdata => ({
 
 export const fetchCustomerError = error => ({
     type: FETCH_CUSTOMER_FAILURE,
+    payload: { error }
+});
+
+export const fetchCustomerWithIDBegin = () => ({
+    type: FETCH_CUSTOMER_WITHID_BEGIN
+});
+
+export const fetchCustomerWithIDSuccess = customerdata => ({
+    type: FETCH_CUSTOMER_WITHID_SUCCESS,
+    payload: { customerdata }
+});
+
+export const fetchCustomerWithIDError = error => ({
+    type: FETCH_CUSTOMER_WITHID_FAILURE,
     payload: { error }
 });
 
@@ -88,6 +106,18 @@ export function fetchCustomer() {
     }
 }
 
+export function fetchCustomerWithID(id) {
+    return dispatch => {
+        dispatch(fetchCustomerWithIDBegin());
+        axios
+        .get("http://localhost:8080/api/customers/"+ id)
+        .then(response => {
+            dispatch(fetchCustomerWithIDSuccess(response.data))
+        })
+        .catch(error => dispatch(fetchCustomerWithIDError(error)));
+    }
+}
+
 export function addCustomer(customerdata) {
     return dispatch => {
         dispatch(addCustomerBegin());
@@ -104,7 +134,7 @@ export function updateCustomer(id, customerdata) {
     return dispatch => {
         dispatch(updateCustomerBegin());
         axios
-        .post("http://localhost:8080/api/customers"+ id, customerdata)
+        .put("http://localhost:8080/api/customers/"+ id, customerdata)
         .then(response => {
             dispatch(updateCustomerSuccess(response.data));
         })

@@ -26,7 +26,7 @@ function CustomersList(props) {
 
 
   function handleEdit(id, customer ) {
-   console.log(customer);
+   history.push("/api/addCustomers/"+id);
  }
 
  function handleDelete(id){

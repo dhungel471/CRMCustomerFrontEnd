@@ -10,10 +10,10 @@ function App() {
         <div>
         <Header />
         <Switch>
-            <Route path="/" exact component={HomePage} />    
-            <Route path="/api" exact component={HomePage} />
+            <Route path="/api" exact component={HomePage} />    
             <Route path="/api/customers" exact component={CustomersList} />
-            <Route path="/api/addCustomers" exact component={AddCustomers} />
+            <Route path="/api/addCustomers/:id" component={AddCustomers} />
+            <Route path="/api/addCustomers" component={AddCustomers} />
         </Switch>
         </div>
     );
