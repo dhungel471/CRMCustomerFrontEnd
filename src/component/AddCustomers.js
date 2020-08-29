@@ -1,8 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import { addCustomer, fetchCustomerWithID, updateCustomer } from '../actions/customerAction';
-
+import { addCustomer, updateCustomer } from '../actions/customerAction';
 
 function mapStateToProps(state) {
     return {
@@ -14,70 +13,41 @@ function mapStateToProps(state) {
 
   const mapDispatchToProps = {
     addCustomer,
-    fetchCustomerWithID,
     updateCustomer
   }
   
 function AddCustomers(props) {
   const slug = props.match.params.id; //checks if id is present in URL, then call to Edit
-
-  let customers = props.customerdata;
-  let customer = null;
-
-  if (slug && customers) {
-    for (let i = 0; i < customers.length; i++) {
-      if (customers[i].id === slug) {
-        customer = customers[i];
-      }
-    }
-  }
-
+  const customers = props.customerdata;
+  const customer = slug && customers && customers.find(customer => customer.id === slug);
  
   const [fName, setfName] = useState(customer && customer.id ? customer.firstName : '');
   const [lName, setlName] = useState(customer && customer.id ? customer.lastName : '');
   const[phone, setPhone] = useState(customer && customer.id ? customer.phoneNumber : '');
   const [address, setAddress] = useState(customer && customer.id ? customer.address : '');
   const history = useHistory();
-
-  useEffect(() => {
-      if(slug) {
-        async function fetchAPI() {
-          try {
-            let customerData = await props.fetchCustomerWithID(slug);
-            setfName(customerData.customerData.firstName)
-          } catch (error) {
-            
-          }
-        }
-        fetchAPI();
-        //props.fetchCustomerWithID(slug)
-      }
-     
-    }, [slug]) 
-
     
-    function handleSubmit(event) {
-     event.preventDefault();
-     console.log(props.customerdata.firstName);
-      let customers = {
-          id: slug ? slug : '',
-          firstName: fName,
-          lastName: lName,
-          phoneNumber: phone,
-          address: address
-      }
-      slug ?  props.updateCustomer(props.customerdata.id, customers):props.addCustomer(customers);
-     
-      history.push("/api/customers");
-      
-  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(props.customerdata.firstName);
+    let customers = {
+        id: slug ? slug : '',
+        firstName: fName,
+        lastName: lName,
+        phoneNumber: phone,
+        address: address
+    }
+    slug ?  props.updateCustomer(props.customerdata.id, customers):props.addCustomer(customers);
+    
+    history.push("/api/customers");
+    
+}
 
   function handleCancel(event) {
     event.preventDefault();
-     history.push("/api/customers");
-     
- }
-  
+    history.push("/api/customers");
+}
+    
 
       return (
     <div className="container">
