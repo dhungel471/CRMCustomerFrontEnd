@@ -8,7 +8,7 @@ function mapStateToProps(state) {
   return {
     error: state.error,
     loading: state.loading,
-    customerdata: state.customerdata
+    customers: state.customers
   }
 }
  
@@ -47,7 +47,7 @@ function CustomersList(props) {
             </tr>
           </thead>
           <tbody>
-          {props.customerdata.length > 0 && props.customerdata.map((customer) => {
+          {props.customers.length > 0 && props.customers.map((customer) => {
             return(
             <tr key={customer.id}>
               <td>

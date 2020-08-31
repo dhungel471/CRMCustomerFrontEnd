@@ -25,9 +25,9 @@ export const fetchCustomerBegin = () => ({
     type: FETCH_CUSTOMER_BEGIN
 });
 
-export const fetchCustomerSuccess = customerdata => ({
+export const fetchCustomerSuccess = customers => ({
     type: FETCH_CUSTOMER_SUCCESS,
-    payload: { customerdata }
+    payload: { customers }
 });
 
 export const fetchCustomerError = error => ({
@@ -39,9 +39,9 @@ export const fetchCustomerWithIDBegin = () => ({
     type: FETCH_CUSTOMER_WITHID_BEGIN
 });
 
-export const fetchCustomerWithIDSuccess = customerdata => ({
+export const fetchCustomerWithIDSuccess = customers => ({
     type: FETCH_CUSTOMER_WITHID_SUCCESS,
-    payload: { customerdata }
+    payload: { customers }
 });
 
 export const fetchCustomerWithIDError = error => ({
@@ -54,7 +54,7 @@ export const addCustomerBegin = () => ({
     type: ADD_CUSTOMER_BEGIN
 });
 
-export const addCustomerSuccess = customerdata => ({
+export const addCustomerSuccess = customers => ({
     type: ADD_CUSTOMER_SUCCESS,
     payload: { message: "success" }
 });
@@ -68,9 +68,9 @@ export const updateCustomerBegin = () => ({
     type: UPDATE_CUSTOMER_BEGIN
 });
 
-export const updateCustomerSuccess = customerdata => ({
+export const updateCustomerSuccess = customer => ({
     type: UPDATE_CUSTOMER_SUCCESS,
-    payload: { message: "success" }
+    payload: { customer }
 });
 
 export const updateCustomerError = error => ({
@@ -85,7 +85,7 @@ export const deleteCustomerBegin = () => ({
 
 export const deleteCustomerSuccess = id => ({
     type: DELETE_CUSTOMER_SUCCESS,
-    payload: { message: "success" }
+    payload: { id }
 });
 
 export const deleteCustomerError = error => ({
@@ -118,11 +118,11 @@ export function fetchCustomerWithID(id) {
     }
 }
 
-export function addCustomer(customerdata) {
+export function addCustomer(customers) {
     return dispatch => {
         dispatch(addCustomerBegin());
         axios
-        .post("http://localhost:8080/api/customers", customerdata)
+        .post("http://localhost:8080/api/customers", customers)
         .then(response => {
             dispatch(addCustomerSuccess(response.data));
         })
@@ -130,11 +130,11 @@ export function addCustomer(customerdata) {
     }
 }
 
-export function updateCustomer(id, customerdata) {
+export function updateCustomer(id, customers) {
     return dispatch => {
         dispatch(updateCustomerBegin());
         axios
-        .put("http://localhost:8080/api/customers/"+ id, customerdata)
+        .put("http://localhost:8080/api/customers/"+ id, customers)
         .then(response => {
             dispatch(updateCustomerSuccess(response.data));
         })
@@ -148,7 +148,7 @@ export function deleteCustomer(id) {
         axios
         .delete("http://localhost:8080/api/customers/"+ id)
         .then(response => {
-            dispatch(deleteCustomerSuccess(response.data))
+            dispatch(deleteCustomerSuccess(id))
         })
         .catch(error => dispatch(deleteCustomerError(error)));
     }
