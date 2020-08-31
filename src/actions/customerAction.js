@@ -25,9 +25,9 @@ export const fetchCustomerBegin = () => ({
     type: FETCH_CUSTOMER_BEGIN
 });
 
-export const fetchCustomerSuccess = customers => ({
+export const fetchCustomerSuccess = customerList => ({
     type: FETCH_CUSTOMER_SUCCESS,
-    payload: { customers }
+    payload: { customerList }
 });
 
 export const fetchCustomerError = error => ({
@@ -39,9 +39,9 @@ export const fetchCustomerWithIDBegin = () => ({
     type: FETCH_CUSTOMER_WITHID_BEGIN
 });
 
-export const fetchCustomerWithIDSuccess = customers => ({
+export const fetchCustomerWithIDSuccess = customerList => ({
     type: FETCH_CUSTOMER_WITHID_SUCCESS,
-    payload: { customers }
+    payload: { customerList }
 });
 
 export const fetchCustomerWithIDError = error => ({
@@ -54,7 +54,7 @@ export const addCustomerBegin = () => ({
     type: ADD_CUSTOMER_BEGIN
 });
 
-export const addCustomerSuccess = customers => ({
+export const addCustomerSuccess = customerList => ({
     type: ADD_CUSTOMER_SUCCESS,
     payload: { message: "success" }
 });

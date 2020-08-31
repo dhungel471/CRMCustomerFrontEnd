@@ -9,7 +9,7 @@ import {UPDATE_CUSTOMER_BEGIN, UPDATE_CUSTOMER_SUCCESS, UPDATE_CUSTOMER_FAILURE}
 import {DELETE_CUSTOMER_BEGIN, DELETE_CUSTOMER_SUCCESS, DELETE_CUSTOMER_FAILURE} from '../actions/customerAction'
 
 const initialState = {
-    customers: [],
+    customerList: [],
     loading: false,
     error: null
 };
@@ -28,7 +28,7 @@ export default function customerReducer(state = initialState, action) {
                 ...state,
                 loading: false,
                 error: null,
-                customers: action.payload.customers
+                customerList: action.payload.customerList
             }
 
         case FETCH_CUSTOMER_FAILURE:
@@ -36,7 +36,7 @@ export default function customerReducer(state = initialState, action) {
                 ...state,
                 loading: false,
                 error: action.payload.error,
-                customers: []
+                customerList: []
             }
         case FETCH_CUSTOMER_WITHID_BEGIN:
             return {
@@ -50,7 +50,7 @@ export default function customerReducer(state = initialState, action) {
                 ...state,
                 loading: false,
                 error: null,
-                customers: action.payload.customers
+                customerList: action.payload.customerList
             }
 
         case FETCH_CUSTOMER_WITHID_FAILURE:
@@ -58,7 +58,7 @@ export default function customerReducer(state = initialState, action) {
                 ...state,
                 loading: false,
                 error: action.payload.error,
-                customers: []
+                customerList: []
             }
 
         case ADD_CUSTOMER_BEGIN:
@@ -87,7 +87,7 @@ export default function customerReducer(state = initialState, action) {
                 error: null
             }
         case UPDATE_CUSTOMER_SUCCESS:
-            const customers = state.customers.map((customer) => {
+            const customerList = state.customerList.map((customer) => {
                 if (customer.id === action.payload.customer.id) {
                     return {
                         ...action.payload.customer,
@@ -97,7 +97,7 @@ export default function customerReducer(state = initialState, action) {
             return {
                 loading: false,
                 error: null,
-                customers
+                customerList
             }
         case UPDATE_CUSTOMER_FAILURE:
             return {
@@ -114,7 +114,7 @@ export default function customerReducer(state = initialState, action) {
             }
         case DELETE_CUSTOMER_SUCCESS:
             return {
-                customers: state.customers.filter(c => c.id !== action.payload.id),
+                customerList: state.customerList.filter(c => c.id !== action.payload.id),
                 loading: false,
                 error: null
             }

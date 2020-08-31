@@ -29,7 +29,6 @@ function AddCustomers(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(props.customers.firstName);
         let customers = {
             id: slug ? slug : '',
             firstName: fName,

@@ -6,9 +6,9 @@ import { fetchCustomer , deleteCustomer} from '../actions/customerAction';
 
 function mapStateToProps(state) {
   return {
-    error: state.error,
-    loading: state.loading,
-    customers: state.customers
+    error: state.customers.error,
+    loading: state.customers.loading,
+    customers: state.customers.customerList
   }
 }
  
@@ -34,6 +34,10 @@ function CustomersList(props) {
       
  }
 
+ function fetchInteractions(id) {
+      history.push(`/api/customers/${id}/interactions`);
+ }
+
   const noBorder = {"border-bottom":"none"}
     return (
         <table className="table">
@@ -53,6 +57,7 @@ function CustomersList(props) {
               <td>
                 <button className="btn btn-info" onClick={() => handleEdit(customer.id, customer)}>Edit</button>
                 <button className="btn btn-danger" onClick={() => handleDelete(customer.id)}>Delete</button>
+                  <button className="btn btn-info" onClick={() => fetchInteractions(customer.id)}>Details</button>
               </td>
             <td>{customer.firstName}</td>
             <td>{customer.lastName}</td>
