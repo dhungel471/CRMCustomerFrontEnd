@@ -118,11 +118,11 @@ export function fetchCustomerWithID(id) {
     }
 }
 
-export function addCustomer(customers) {
+export function addCustomer(customer) {
     return dispatch => {
         dispatch(addCustomerBegin());
         axios
-        .post("http://localhost:8080/api/customers", customers)
+        .post("http://localhost:8080/api/customers", customer)
         .then(response => {
             dispatch(addCustomerSuccess(response.data));
         })
@@ -130,11 +130,11 @@ export function addCustomer(customers) {
     }
 }
 
-export function updateCustomer(id, customers) {
+export function updateCustomer(id, customer) {
     return dispatch => {
         dispatch(updateCustomerBegin());
         axios
-        .put("http://localhost:8080/api/customers/"+ id, customers)
+        .put("http://localhost:8080/api/customers/"+ id, customer)
         .then(response => {
             dispatch(updateCustomerSuccess(response.data));
         })

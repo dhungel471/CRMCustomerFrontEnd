@@ -18,8 +18,8 @@ const mapDispatchToProps = {
 
 function AddCustomers(props) {
     const slug = props.match.params.id; //checks if id is present in URL, then call to Edit
-    const customers = props.customers;
-    const customer = slug && customers && customers.find(customer => customer.id === slug);
+    const customerList = props.customers.customerList;
+    const customer = slug && customerList && customerList.find(customer => customer.id === slug);
 
     const [fName, setfName] = useState(customer && customer.id ? customer.firstName : '');
     const [lName, setlName] = useState(customer && customer.id ? customer.lastName : '');
@@ -29,14 +29,14 @@ function AddCustomers(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        let customers = {
+        let customer = {
             id: slug ? slug : '',
             firstName: fName,
             lastName: lName,
             phoneNumber: phone,
             address: address
         }
-        slug ? props.updateCustomer(props.customers.id, customers) : props.addCustomer(customers);
+        slug ? props.updateCustomer(customer.id, customer) : props.addCustomer(customer);
 
         history.push("/api/customers");
 
