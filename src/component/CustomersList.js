@@ -1,74 +1,82 @@
 import React, {useEffect} from 'react';
-import { connect } from 'react-redux';
-import { useHistory } from "react-router-dom";
-import { fetchCustomer , deleteCustomer} from '../actions/customerAction';
-
+import {connect} from 'react-redux';
+import {useHistory} from "react-router-dom";
+import {fetchCustomer, deleteCustomer} from '../actions/customerAction';
+import PageHeader from "./PageHeader";
 
 function mapStateToProps(state) {
-  return {
-    error: state.customers.error,
-    loading: state.customers.loading,
-    customers: state.customers.customerList
-  }
+    return {
+        error: state.customers.error,
+        loading: state.customers.loading,
+        customers: state.customers.customerList
+    }
 }
- 
+
 const mapDispatchToProps = {
-  fetchCustomer,
-  deleteCustomer
+    fetchCustomer,
+    deleteCustomer
 }
 
 function CustomersList(props) {
-  const history = useHistory();
+    const history = useHistory();
 
-  useEffect(() => {
-    props.fetchCustomer();
-  }, [])
+    useEffect(() => {
+        props.fetchCustomer();
+    }, [])
 
 
-  function handleEdit(id, customer ) {
-   history.push("/api/addCustomers/"+id);
- }
+    function handleEdit(id, customer) {
+        history.push("/api/addCustomers/" + id);
+    }
 
- function handleDelete(id){
-   props.deleteCustomer(id);
-      
- }
+    function handleDelete(id) {
+        props.deleteCustomer(id);
 
- function fetchInteractions(id) {
-      history.push(`/api/customers/${id}/interactions`);
- }
+    }
 
-  const noBorder = {"border-bottom":"none"}
+    function fetchInteractions(id) {
+        history.push(`/api/customers/${id}/interactions`);
+    }
+
+    const noBorder = {"border-bottom": "none"}
     return (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Edit/Delete</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Phone</th>
-              <th>Address</th>
-            </tr>
-          </thead>
-          <tbody>
-          {props.customers.length > 0 && props.customers.map((customer) => {
-            return(
-            <tr key={customer.id}>
-              <td>
-                <button className="btn btn-info" onClick={() => handleEdit(customer.id, customer)}>Edit</button>
-                <button className="btn btn-danger" onClick={() => handleDelete(customer.id)}>Delete</button>
-                  <button className="btn btn-info" onClick={() => fetchInteractions(customer.id)}>Details</button>
-              </td>
-            <td>{customer.firstName}</td>
-            <td>{customer.lastName}</td>
-            <td>{customer.phoneNumber}</td>
-            <td>{customer.address}</td>           
-            </tr>
-            );
-          })}
-          </tbody>
-        
-        </table>
+        <>
+            <PageHeader title="Customers" />
+            <table className="table">
+                <thead>
+                <tr>
+                    <th>Edit/Delete</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                </tr>
+                </thead>
+                <tbody>
+                {props.customers.length > 0 && props.customers.map((customer) => {
+                    return (
+                        <tr key={customer.id}>
+                            <td>
+                                <button className="btn btn-info"
+                                        onClick={() => handleEdit(customer.id, customer)}>Edit
+                                </button>
+                                <button className="btn btn-danger" onClick={() => handleDelete(customer.id)}>Delete
+                                </button>
+                                <button className="btn btn-info"
+                                        onClick={() => fetchInteractions(customer.id)}>Details
+                                </button>
+                            </td>
+                            <td>{customer.firstName}</td>
+                            <td>{customer.lastName}</td>
+                            <td>{customer.phoneNumber}</td>
+                            <td>{customer.address}</td>
+                        </tr>
+                    );
+                })}
+                </tbody>
+
+            </table>
+        </>
     );
 }
 

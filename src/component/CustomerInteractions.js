@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import { fetchCustomerInteractions, deleteCustomerInteraction } from '../actions/customerInteractionAction';
 import {useHistory} from "react-router-dom";
+import PageHeader from "./PageHeader";
 
 const CustomerInteractions = (props) => {
 
@@ -33,6 +34,7 @@ const CustomerInteractions = (props) => {
 
     return (
         <div>
+            <PageHeader title="Customer Interactions" />
             <button className="btn btn-info" onClick={addNew}>New</button>
             <table className="table">
                 <thead>
