@@ -9,7 +9,15 @@ const AddCustomerInteractions = (props) => {
     const history = useHistory();
 
     const dispatch = useDispatch();
-    const slug = props.match.params.id;
+    const customerId = props.match.params.customerId;
+    const customerInteractionId = props.match.params.customerInteractionId;
+
+    console.log("customer: ", customerId);
+    console.log("interaction: ", customerInteractionId);
+
+    const interactionList = props.customerInteractions.customerInteractionsList;
+    const interaction = customerId && customerInteractionId && interactionList 
+            && interactionList.find(interaction => interaction.id === customerInteractionId && interaction.customerId === customerId);
 
     const [date, setDate] = useState(formatDate(new Date()));
     const [description, setDescription] = useState('');

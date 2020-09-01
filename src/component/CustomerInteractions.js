@@ -23,6 +23,14 @@ const CustomerInteractions = (props) => {
         history.push(`/api/customers/${customerId}/interactions/new`);
     }
 
+    function handleEdit(customerId, customerInteractionId) {
+        history.push(`/api/customers/${customerId}/interactions/${customerInteractionId}`);
+    }
+     
+    //   function handleDelete(customerId, customerInteractionId){
+    //     props.deleteCustomer(customerId, customerInteractionId);  
+    //   }
+
     return (
         <div>
             <button className="btn btn-info" onClick={addNew}>New</button>
@@ -40,10 +48,15 @@ const CustomerInteractions = (props) => {
                 {customerInteractionsList.length > 0 && customerInteractionsList.map((customerInteraction) => {
                     return (
                         <tr key={customerInteraction.id}>
+                            <td>
+                                <button className="btn btn-info" onClick={() => handleEdit(customer.id, customerInteraction.id)}>Edit</button>
+                                <button className="btn btn-danger" onClick={() => handleDelete(customer.id, customerInteraction.id)}>Delete</button>
+                            </td>
                             <td>{customerInteraction.createdDate}</td>
                             <td>{customerInteraction.status}</td>
                             <td>{customerInteraction.description}</td>
                             <td>{customerInteraction.channel}</td>
+
                         </tr>
                     );
                 })}

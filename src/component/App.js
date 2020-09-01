@@ -16,6 +16,7 @@ function App() {
             <Route path="/api/customers" exact component={CustomersList} />
             <Route path="/api/addCustomers/:id" component={AddCustomers} />
             <Route path="/api/addCustomers" component={AddCustomers} />
+            <Route path="/api/customers/:id/interactions/:interactionId" component={AddCustomerInteractions} />
             <Route path="/api/customers/:id/interactions/new" component={AddCustomerInteractions} />
             <Route path="/api/customers/:id/interactions" component={CustomerInteractions} />
         </Switch>
