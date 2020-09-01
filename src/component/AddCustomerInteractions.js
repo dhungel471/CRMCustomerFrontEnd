@@ -13,7 +13,7 @@ const AddCustomerInteractions = (props) => {
     const [date, setDate] = useState('');
     const [description, setDescription] = useState('');
     const [status, setStatus] = useState('');
-    const [channel, setChannel] = useState('');
+    const [channel, setChannel] = useState('phone');
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -55,8 +55,11 @@ const AddCustomerInteractions = (props) => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="channel">Channel:</label>
-                    <input className="form-control" id="address" aria-describedby="channel" placeholder="Enter Channel"
-                           value={channel} onChange={e => setChannel(e.target.value)}/>
+                    <select className="form-control" id="status" aria-describedby="status"
+                            value={channel} onChange={e => setChannel(e.target.value)}>
+                        <option value="phone">Phone</option>
+                        <option value="email">Email</option>
+                    </select>
                 </div>
                 <button type="submit" className="btn btn-success" onClick={handleSubmit}>Submit</button>
                 <button className="btn btn-primary" style={{"marginLeft": "10px"}} onClick={handleCancel}>Cancel
