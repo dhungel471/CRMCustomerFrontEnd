@@ -1,50 +1,53 @@
-import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
-import { addCustomerInteraction } from '../actions/customerInteractionAction';
-import { useHistory } from "react-router-dom";
-import { formatDate } from './utils';
+import React, {useState} from 'react';
+import {useSelector, useDispatch} from "react-redux";
+import {addCustomerInteraction, updateCustomerInteraction} from '../actions/customerInteractionAction';
+import {useHistory} from "react-router-dom";
+import {formatDate} from './utils';
 
 const AddCustomerInteractions = (props) => {
 
     const history = useHistory();
 
     const dispatch = useDispatch();
-    const customerId = props.match.params.customerId;
-    const customerInteractionId = props.match.params.customerInteractionId;
+    const customerId = props.match.params.id;
+    const customerInteractionId = props.match.params.interactionId;
 
-    console.log("customer: ", customerId);
-    console.log("interaction: ", customerInteractionId);
+    const state = useSelector((state) => state);
+    const interactionList = state.customerInteractions.customerInteractionsList;
+    const interaction = customerId && customerInteractionId && interactionList
+        && interactionList.find(interaction => interaction.id === customerInteractionId && interaction.customerId === customerId);
 
-    const interactionList = props.customerInteractions.customerInteractionsList;
-    const interaction = customerId && customerInteractionId && interactionList 
-            && interactionList.find(interaction => interaction.id === customerInteractionId && interaction.customerId === customerId);
-
-    const [date, setDate] = useState(formatDate(new Date()));
-    const [description, setDescription] = useState('');
-    const [channel, setChannel] = useState('phone');
-    const [status, setStatus] = useState('new');
+    const [date, setDate] = useState(interaction ? interaction.createdDate : formatDate(new Date()));
+    const [description, setDescription] = useState(interaction ? interaction.description : '');
+    const [channel, setChannel] = useState(interaction ? interaction.channel : 'phone');
+    const [status, setStatus] = useState(interaction ? interaction.status : 'new');
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const interaction = {
-            customerId: slug ? slug : '',
+            id: customerInteractionId ? customerInteractionId : '',
+            customerId: customerId,
             createdDate: date,
             status,
             description,
             channel
         }
-        dispatch(addCustomerInteraction(interaction));
+        if (customerInteractionId) {
+            dispatch(updateCustomerInteraction(customerInteractionId, interaction));
+        } else {
+            dispatch(addCustomerInteraction(interaction));
+        }
 
-        history.push(`/api/customers/${slug}/interactions`);
+        history.push(`/api/customers/${customerId}/interactions`);
     }
 
     const onStatusChange = (event) => {
         setStatus(event.target.value);
     }
 
-    function handleCancel(event) {
+    const handleCancel = (event) => {
         event.preventDefault();
-        history.push("/api/customers");
+        history.push(`/api/customers/${customerId}/interactions`);
     }
 
     return (
@@ -53,7 +56,8 @@ const AddCustomerInteractions = (props) => {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="date">Date:</label>
-                    <input className="form-control" type="date" id="date" name="date" value={date} onChange={e => setDate(e.target.value)}/>
+                    <input className="form-control" type="date" id="date" name="date" value={date}
+                           onChange={e => setDate(e.target.value)}/>
                 </div>
 
                 <div className="form-group">
@@ -68,43 +72,43 @@ const AddCustomerInteractions = (props) => {
                     <div className="row">
                         <div className="col-sm-10">
                             <div className="form-check">
-                            <input 
-                                className="form-check-input" 
-                                type="radio" 
-                                name="status" 
-                                id="new" 
-                                value="new" 
-                                checked={status === "new"}
-                                onChange={onStatusChange} />
-                            <label className="form-check-label" htmlFor="new">
-                                New
-                            </label>
+                                <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    name="status"
+                                    id="new"
+                                    value="new"
+                                    checked={status === "new"}
+                                    onChange={onStatusChange}/>
+                                <label className="form-check-label" htmlFor="new">
+                                    New
+                                </label>
                             </div>
                             <div className="form-check">
-                            <input 
-                                className="form-check-input" 
-                                type="radio"
-                                name="status" 
-                                id="pending" 
-                                value="pending"
-                                checked={status === "pending"}
-                                onChange={onStatusChange} />
-                            <label className="form-check-label" htmlFor="pending">
-                                Pending
-                            </label>
+                                <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    name="status"
+                                    id="pending"
+                                    value="pending"
+                                    checked={status === "pending"}
+                                    onChange={onStatusChange}/>
+                                <label className="form-check-label" htmlFor="pending">
+                                    Pending
+                                </label>
                             </div>
                             <div className="form-check disabled">
-                            <input 
-                                className="form-check-input" 
-                                type="radio" 
-                                name="status" 
-                                id="complete" 
-                                value="complete"
-                                checked={status === "complete"}
-                                onChange={onStatusChange} />
-                            <label className="form-check-label" htmlFor="complete">
-                                Complete
-                            </label>
+                                <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    name="status"
+                                    id="complete"
+                                    value="complete"
+                                    checked={status === "complete"}
+                                    onChange={onStatusChange}/>
+                                <label className="form-check-label" htmlFor="complete">
+                                    Complete
+                                </label>
                             </div>
                         </div>
                     </div>

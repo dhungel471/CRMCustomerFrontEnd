@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
-import {fetchCustomerInteractions} from '../actions/customerInteractionAction';
+import { fetchCustomerInteractions, deleteCustomerInteraction } from '../actions/customerInteractionAction';
 import {useHistory} from "react-router-dom";
 
 const CustomerInteractions = (props) => {
@@ -8,7 +8,7 @@ const CustomerInteractions = (props) => {
     const state = useSelector((state) => state);
     const history = useHistory();
 
-    const {customerInteractionsList, loading, error} = state.customerInteractions;
+    const { customerInteractionsList } = state.customerInteractions;
     const dispatch = useDispatch();
     const customerId = props.match.params.id;
 
@@ -20,16 +20,16 @@ const CustomerInteractions = (props) => {
     }, []);
 
     const addNew = () => {
-        history.push(`/api/customers/${customerId}/interactions/new`);
+        history.push(`/api/customers/${customerId}/addInteractions`);
     }
 
     function handleEdit(customerId, customerInteractionId) {
         history.push(`/api/customers/${customerId}/interactions/${customerInteractionId}`);
     }
-     
-    //   function handleDelete(customerId, customerInteractionId){
-    //     props.deleteCustomer(customerId, customerInteractionId);  
-    //   }
+
+    function handleDelete(customerInteractionId) {
+        dispatch(deleteCustomerInteraction(customerInteractionId));
+    }
 
     return (
         <div>
@@ -49,8 +49,12 @@ const CustomerInteractions = (props) => {
                     return (
                         <tr key={customerInteraction.id}>
                             <td>
-                                <button className="btn btn-info" onClick={() => handleEdit(customer.id, customerInteraction.id)}>Edit</button>
-                                <button className="btn btn-danger" onClick={() => handleDelete(customer.id, customerInteraction.id)}>Delete</button>
+                                <button className="btn btn-info"
+                                        onClick={() => handleEdit(customerId, customerInteraction.id)}>Edit
+                                </button>
+                                <button className="btn btn-danger"
+                                        onClick={() => handleDelete(customerInteraction.id)}>Delete
+                                </button>
                             </td>
                             <td>{customerInteraction.createdDate}</td>
                             <td>{customerInteraction.status}</td>

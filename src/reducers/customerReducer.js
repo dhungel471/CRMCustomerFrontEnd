@@ -79,7 +79,6 @@ export default function customerReducer(state = initialState, action) {
                 loading: false,
                 error: action.payload.error
             }
-
         case UPDATE_CUSTOMER_BEGIN:
             return {
                 ...state,
@@ -124,7 +123,6 @@ export default function customerReducer(state = initialState, action) {
                 loading: false,
                 error: action.payload.error
             }
-
         default:
             return state;
     }
