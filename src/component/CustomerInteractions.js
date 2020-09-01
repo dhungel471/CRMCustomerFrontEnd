@@ -40,7 +40,7 @@ const CustomerInteractions = (props) => {
                 {customerInteractionsList.length > 0 && customerInteractionsList.map((customerInteraction) => {
                     return (
                         <tr key={customerInteraction.id}>
-                            <td>{customerInteraction.date}</td>
+                            <td>{customerInteraction.createdDate}</td>
                             <td>{customerInteraction.status}</td>
                             <td>{customerInteraction.description}</td>
                             <td>{customerInteraction.channel}</td>
