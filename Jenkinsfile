@@ -14,6 +14,9 @@ pipeline {
             }
         }
         stage('Delivery') {
+            steps {
+                echo 'mock delivery Front End'
+            }
 
         }
         
