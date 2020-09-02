@@ -79,8 +79,8 @@ function AddCustomers(props) {
                                placeholder="Enter Address"
                                value={address} onChange={e => setAddress(e.target.value)}/>
                     </div>
-                    <button type="submit" className="btn btn-success" onClick={handleSubmit}>Submit</button>
-                    <button className="btn btn-primary" style={{"marginLeft": "10px"}} onClick={handleCancel}>Cancel
+                    <button type="submit" className="btn btn-success mr-2" onClick={handleSubmit}>Submit</button>
+                    <button className="btn btn-primary" onClick={handleCancel}>Cancel
                     </button>
                 </form>
             </div>

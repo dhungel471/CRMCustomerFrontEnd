@@ -9,7 +9,7 @@ import AddCustomerInteractions from "./AddCustomerInteractions";
 
 function App() {
     return(
-        <div>
+        <div className="container-fluid">
         <Header />
         <Switch>
             <Route path="/api" exact component={HomePage} />    

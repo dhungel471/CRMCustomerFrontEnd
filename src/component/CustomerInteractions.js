@@ -33,35 +33,36 @@ const CustomerInteractions = (props) => {
     }
 
     return (
-        <div>
+        <>
             <PageHeader title="Customer Interactions" />
-            <button className="btn btn-info" onClick={addNew}>New</button>
+            <button className="btn btn-success mb-3 ml-3" onClick={addNew}>New Interaction</button>
+            <div className="table-responsive-md">
             <table className="table">
-                <thead>
-                <tr>
-                    <th>Edit/Delete</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Description</th>
-                    <th>Channel</th>
+                <thead className="thead-light">
+                <tr className="d-flex">
+                    <th className="col-3">Edit/Delete</th>
+                    <th className="col-2">Date</th>
+                    <th className="col-2">Status</th>
+                    <th className="col-3">Description</th>
+                    <th className="col-2">Channel</th>
                 </tr>
                 </thead>
                 <tbody>
                 {customerInteractionsList.length > 0 && customerInteractionsList.map((customerInteraction) => {
                     return (
-                        <tr key={customerInteraction.id}>
-                            <td>
-                                <button className="btn btn-info"
+                        <tr className="d-flex" key={customerInteraction.id}>
+                            <td className="col-3">
+                                <button className="btn btn-info mr-2"
                                         onClick={() => handleEdit(customerId, customerInteraction.id)}>Edit
                                 </button>
                                 <button className="btn btn-danger"
                                         onClick={() => handleDelete(customerInteraction.id)}>Delete
                                 </button>
                             </td>
-                            <td>{customerInteraction.createdDate}</td>
-                            <td>{customerInteraction.status}</td>
-                            <td>{customerInteraction.description}</td>
-                            <td>{customerInteraction.channel}</td>
+                            <td className="col-2">{customerInteraction.createdDate}</td>
+                            <td className="col-2">{customerInteraction.status}</td>
+                            <td className="col-3">{customerInteraction.description}</td>
+                            <td className="col-2">{customerInteraction.channel}</td>
 
                         </tr>
                     );
@@ -69,7 +70,8 @@ const CustomerInteractions = (props) => {
                 </tbody>
 
             </table>
-        </div>
+            </div>
+        </>
     );
 }
 

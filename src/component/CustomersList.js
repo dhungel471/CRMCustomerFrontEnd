@@ -42,40 +42,42 @@ function CustomersList(props) {
     return (
         <>
             <PageHeader title="Customers" />
+            <div className="table-responsive-md">
             <table className="table">
-                <thead>
-                <tr>
-                    <th>Edit/Delete</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Phone</th>
-                    <th>Address</th>
+                <thead className="thead-light">
+                <tr className="d-flex">
+                    <th className="col-3">Edit/Delete</th>
+                    <th className="col-2">First Name</th>
+                    <th className="col-2">Last Name</th>
+                    <th className="col-2">Phone</th>
+                    <th className="col-3">Address</th>
                 </tr>
                 </thead>
                 <tbody>
                 {props.customers.length > 0 && props.customers.map((customer) => {
                     return (
-                        <tr key={customer.id}>
-                            <td>
-                                <button className="btn btn-info"
+                        <tr className="d-flex" key={customer.id}>
+                            <td className="col-3">
+                                <button className="btn btn-success mr-2"
                                         onClick={() => handleEdit(customer.id, customer)}>Edit
                                 </button>
-                                <button className="btn btn-danger" onClick={() => handleDelete(customer.id)}>Delete
+                                <button className="btn btn-danger mr-2" onClick={() => handleDelete(customer.id)}>Delete
                                 </button>
                                 <button className="btn btn-info"
                                         onClick={() => fetchInteractions(customer.id)}>Details
                                 </button>
                             </td>
-                            <td>{customer.firstName}</td>
-                            <td>{customer.lastName}</td>
-                            <td>{customer.phoneNumber}</td>
-                            <td>{customer.address}</td>
+                            <td className="col-2">{customer.firstName}</td>
+                            <td className="col-2">{customer.lastName}</td>
+                            <td className="col-2">{customer.phoneNumber}</td>
+                            <td className="col-3">{customer.address}</td>
                         </tr>
                     );
                 })}
                 </tbody>
 
             </table>
+            </div>
         </>
     );
 }
