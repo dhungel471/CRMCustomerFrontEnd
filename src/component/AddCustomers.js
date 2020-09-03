@@ -60,18 +60,22 @@ function AddCustomers(props) {
                         <label htmlFor="fName">First Name:</label>
                         <input className="form-control" id="fname" aria-describedby="fname"
                                placeholder="Enter First Name"
-                               value={fName} onChange={e => setfName(e.target.value)}/>
+                               value={fName} onChange={e => setfName(e.target.value)} required/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="lName">Last Name:</label>
                         <input className="form-control" id="lName" aria-describedby="lName"
                                placeholder="Enter Last Name"
-                               value={lName} onChange={e => setlName(e.target.value)}/>
+                               value={lName} onChange={e => setlName(e.target.value)} required/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="phone">Phone:</label>
-                        <input className="form-control" id="phone" aria-describedby="phone" placeholder="Enter Phone"
-                               value={phone} onChange={e => setPhone(e.target.value)}/>
+                        <input className="form-control" id="phone" aria-describedby="phone" placeholder="Enter Phone number"
+                               value={phone} onChange={e => setPhone(e.target.value)} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+                        <small id="phone" class="form-text text-muted">
+                        123-456-7890
+                        </small>
+                               
                     </div>
                     <div className="form-group">
                         <label htmlFor="phone">Address:</label>
@@ -79,7 +83,7 @@ function AddCustomers(props) {
                                placeholder="Enter Address"
                                value={address} onChange={e => setAddress(e.target.value)}/>
                     </div>
-                    <button type="submit" className="btn btn-success mr-2" onClick={handleSubmit}>Submit</button>
+                    <button type="submit" className="btn btn-success mr-2">Submit</button>
                     <button className="btn btn-primary" onClick={handleCancel}>Cancel
                     </button>
                 </form>
