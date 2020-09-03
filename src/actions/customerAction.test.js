@@ -1,9 +1,5 @@
 import * as customerAction from './customerAction';
 
-const FETCH_CUSTOMER_BEGIN = 'FETCH_CUSTOMER_BEGIN';
-const FETCH_CUSTOMER_SUCCESS = 'FETCH_CUSTOMER_SUCCESS';
-const FETCH_CUSTOMER_FAILURE = 'FETCH_CUSTOMER_FAILURE';
-
 describe("customer actions", () => {
     const customerList = [{id: "1", name: "Taylor"}, {id: "2", name: "Alicia"}];
 
