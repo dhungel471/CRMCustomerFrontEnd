@@ -22,12 +22,11 @@ jest.mock('react-router-dom', () => ({
 
 describe('CustomersList', () => {
 
-    let props, store, mockDispatch;
+    let props, store;
 
     beforeEach(() => {
         const mockFetchCustomer = jest.fn();
         const mockDeleteCustomer = jest.fn();
-        mockDispatch = jest.fn();
 
         const mockState = {
             error: '',
@@ -53,7 +52,7 @@ describe('CustomersList', () => {
     });
 
   it('finds title', () => {
-      const {getByText, queryByText, getByTestId, container} = render(
+      const { queryByText } = render(
         <Provider store={store}>
             <CustomersList props={props} />
         </Provider>
