@@ -72,7 +72,7 @@ function AddCustomers(props) {
                         <label htmlFor="phone">Phone:</label>
                         <input className="form-control" id="phone" aria-describedby="phone" placeholder="Enter Phone number"
                                value={phone} onChange={e => setPhone(e.target.value)} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
-                        <small id="phone" class="form-text text-muted">
+                        <small id="phone" className="form-text text-muted">
                         123-456-7890
                         </small>
                                
