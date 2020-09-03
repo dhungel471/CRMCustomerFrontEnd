@@ -68,7 +68,7 @@ const AddCustomerInteractions = (props) => {
                         <label htmlFor="description">Description:</label>
                         <textarea className="form-control" id="description" aria-describedby="description"
                                   placeholder="Enter Description"
-                                  value={description} onChange={e => setDescription(e.target.value)}>
+                                  value={description} onChange={e => setDescription(e.target.value)} required>
                     </textarea>
                     </div>
                     <fieldset className="form-group">
@@ -125,7 +125,7 @@ const AddCustomerInteractions = (props) => {
                             <option value="email">Email</option>
                         </select>
                     </div>
-                    <button type="submit" className="btn btn-success" onClick={handleSubmit}>Submit</button>
+                    <button type="submit" className="btn btn-success">Submit</button>
                     <button className="btn btn-primary" style={{"marginLeft": "10px"}} onClick={handleCancel}>Cancel
                     </button>
                 </form>
