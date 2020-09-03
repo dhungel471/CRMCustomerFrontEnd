@@ -13,9 +13,9 @@ describe("customer actions", () => {
     });
 
     it("fetchCustomerSuccess", () => {
-        const expectedAction = {type: customerAction.FETCH_CUSTOMER_SUCCESS, payload: {customerList: {customerList}}};
+        const expectedAction = {type: customerAction.FETCH_CUSTOMER_SUCCESS, payload: {customerList: customerList}};
 
-        expect(customerAction.fetchCustomerSuccess({customerList})).toEqual(expectedAction);
+        expect(customerAction.fetchCustomerSuccess(customerList)).toEqual(expectedAction);
     });
 
     it("fetchCustomerError", () => {
