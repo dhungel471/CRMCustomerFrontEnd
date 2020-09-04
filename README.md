@@ -12,6 +12,7 @@
 * Fetch interactions by customer id
 * Responsive design
 * Form validation for create customer and interaction forms
+* Sort customer interactions by created date
 
 ### Technology
 - React 16
