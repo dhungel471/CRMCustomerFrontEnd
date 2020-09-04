@@ -24,6 +24,7 @@
 ### Methodology
 - Project board - https://github.com/dhungel471/CRMCustomerFrontEnd/projects/1
 - Pair programming
+- Continous Integration using Jenkins - https://github.com/dhungel471/CRMCustomerFrontEnd/blob/master/Jenkinsfile
 - Unit test
   - Action test - https://github.com/dhungel471/CRMCustomerFrontEnd/blob/master/src/actions/customerAction.test.js
   - Component test - https://github.com/dhungel471/CRMCustomerFrontEnd/blob/master/src/component/CustomersList.test.js
