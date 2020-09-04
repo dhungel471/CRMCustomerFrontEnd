@@ -11,6 +11,7 @@
 * Allow users to interact with customers via CRUD operations
 * Fetch interactions by customer id
 * Responsive design
+* Form validation for create customer and interaction forms
 
 ### Technology
 - React 16
@@ -24,6 +25,9 @@
 - Project board - https://github.com/dhungel471/CRMCustomerFrontEnd/projects/1
 - Pair programming
 - Unit test
+  - Action test - https://github.com/dhungel471/CRMCustomerFrontEnd/blob/master/src/actions/customerAction.test.js
+  - Component test - https://github.com/dhungel471/CRMCustomerFrontEnd/blob/master/src/component/CustomersList.test.js
+  - Reducer test - https://github.com/dhungel471/CRMCustomerFrontEnd/blob/master/src/reducers/customerReducer.test.js
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
